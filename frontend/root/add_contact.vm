@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Add Contact</title>
+    <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Katherine Geist Date: 13 Oct 2022 -->
+
+    <meta charset="utf-8" >
+    <!-- ======== EXTERNAL SCRIPTS ========================= -->
+    <link rel="stylesheet" href="/assets/css/patient_records/add.css">
+    <style>
+        .nav-handler {
+            margin: 0 auto;
+            width: 1024px;
+            padding-top: 5px;
+        }
+    </style>
+    ${global_head}
+</head>
+
+
+<body id="add_record_body">
+    <!-- ======== HEADER ========================= -->
+    <!-- Written by KSG -->
+    ${header}
+
+    <div class="nav-handler">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/dashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="/record/search">Search</a>
+                </li>
+                <li class="breadcrumb-item active" ><a href="/patient/view/${patient.Id}">View</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add Contact</li>
+            </ol>
+        </nav>
+    </div>
+
+	<h2 class="pageName">Add Patient Contact:</h2>
+		
+    <!-- ======== PATIENT INPUT FORM ========================= -->
+    <!-- Written by KSG -->
+    <form action="/contact/add/${patient.Id}" method="POST" class="background-call" data-redirect="/patient/view/${patient.Id}">
+         <fieldset class="form-control">
+                <legend>CONTACT INFORMATION</legend>
+                <div>
+                    <label for="address">Street Address</label>
+                    <input type="text" id="address" name="address" class="form-control" placeholder="4000 Flora Avenue" pattern="^\d+(\s{1}\w+)(\s{1}?\w+)+$" maxlength="95"
+                    oninput="this.setCustomValidity('')"
+                    oninvalid="this.setCustomValidity('Must be number (0-9) followed by the street name (a-Z) and street type (a-Z)')" >
+                    <div>
+                        <label for="city">City
+                            <input type="text" id="city" name="city" placeholder="Saint Louis" class="form-control address-fields">
+                        </label>
+                        <label for="zip">Zipcode
+                            <input type="text" id="zip" name="zip" placeholder="63110" class="form-control address-fields" maxlength = "5" pattern="^\d{5}$"
+                            oninput="this.setCustomValidity('')"                                        
+                            oninvalid="this.setCustomValidity('Must be 5 digits')"
+                            >
+                        </label>
+                    </div>
+                    <div class="field-flex">
+                        <!-- Dropdown for Phone Type -->
+                        <label for="phoneType">Phone Type
+                            <select id="phoneType" name="PhoneType" class="form-select">
+                                <option value="Home">Home</option>
+                                <option value="Mobi">Mobile</option>
+                                <option value="Work">Work</option>
+                            </select>
+                        </label>
+                        <label for="phone">Phone Number
+                            <input type="text" id="phone" name="phone" class="form-control phone-format" placeholder="(123) 456 - 7890" pattern="^\([0-9]{3}\) [0-9]{3} - [0-9]{4}$" maxlength ="16"
+                            oninput="this.setCustomValidity('')"
+                            oninvalid="this.setCustomValidity('Must be in format (&#35;&#35;&#35;) &#35;&#35;&#35; - &#35;&#35;&#35;')">
+                        </label>
+                        <label for="email">Email Address
+                            <input type="email" id="email" name="email" class="form-control" placeholder="eleanor@awesome.com" pattern="^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$" maxlength = "255"
+                            oninput="this.setCustomValidity('')"                                        
+                            oninvalid="this.setCustomValidity('Must be in format &#92;&lt;email handle&#92;&gt;@&#92;&lt;service&#92;&gt;.&#92;&lt;domain&#92;&gt;')">
+                        </label>
+                        <br>
+                    </div>
+                </div>
+            </fieldset>
+        <br>
+        <div class="text-center">
+			<input type="submit" value="Submit" class="submit-button btn btn-dark btn-lg">
+		</div>
+        <br>
+    </form>
+    <br>
+    <div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <p>Please contact the Missouri IIS for assistance!</p>
+                <p>Phone: XXX-XXX-XXXX</p>
+                <p>Email: helpme@missouri.gov</p><br>
+            </div>
+        </div>
+    </div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="main-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="" class="rounded me-2" alt="...">
+                <strong class="me-auto" id="response-name"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="response"></div>
+        </div>
+    </div>
+    <script src="/assets/js/patient_records/handle_requests.js" defer></script>
+    <script src="/assets/js/patient_records/format_phone.js" defer></script>
+</body>
+</html>

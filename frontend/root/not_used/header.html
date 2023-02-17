@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title>Missouri COVID-19 Vaccine Tracker </title>
+		<!--
+				Missouri COVID-19 Vaccine Tracker Application 
+				Filename: index.html
+	  
+				Team: Turtle Shell Development
+				Authors: Katherine Geist (KSG), Justin Macapanpan (JJM), Jasmin Milicevic (JM)
+				Date: 4 October 2022 
+		 
+				 Supporting files: styles.css
+			  -->
+
+		<meta charset="utf-8">
+
+		<!-- ======== CSS	========================= -->
+		<link rel="stylesheet" href="assets/css/style.css">
+
+		<!-- ======== JS	========================= -->
+		<script src="assets/js/modernizr.custom.40753.js" type="text/javascript"></script>
+		<script src="assets/js/popup.js" type="text/javascript" defer></script>
+    </head>
+    
+    <body>
+			<!-- ======== HEADER	========================= -->
+			<!-- 		Written by KSG -->
+			<div class="header">
+					<div id="inner-header">
+	<!-- 					Used to be an a element now a button -->
+						<button class="logout">Logout</button>
+						<button class="trigger">Help</button>
+						<img src="assets/images/logo-banner.png"
+							alt="Missouri DHSS Logo: COVID-19 Vaccine Tracker, Authorized users only" />
+						</div>
+			</div>
+		
+		<!-- ======== HELP POPUP BUTTON	========================= -->
+		<!-- 		Written by JM -->
+		<div>
+			<div class="modal">
+				<div class="modal-content">
+					<span class="close-button">&times;</span>
+					<h1>Please contact the Missouri IIS for assistance!</h1>
+					<p>Phone: XXX-XXX-XXXX</p>
+					<p>Email: helpme@missouri.gov</p>
+				</div>
+			</div>
+		</div>
+	
+<!-- ======= SCRIPTS	=========================		 -->
+
+<!-- Popup Modal, Written by JM -->
+		<script>
+			const modal = document.querySelector(".modal");
+			const trigger = document.querySelector(".trigger");
+			const closeButton = document.querySelector(".close-button");
+
+			function toggleModal() {
+				modal.classList.toggle("show-modal");
+				document.getElementById("pop-up").style.display = (document.getElementById("pop-up").style.display != "block" ? "block" : "none");
+			}
+
+			function windowOnClick(event) {
+				if (event.target === modal) {
+					toggleModal();
+				}
+			}
+
+			trigger.addEventListener("click", toggleModal);
+			closeButton.addEventListener("click", toggleModal);
+			window.addEventListener("click", windowOnClick);
+		</script>
+<!-- Logout Modal, Written by JM -->
+		<script>
+			const logout = document.querySelector(".logout");
+
+			function gohome() {
+				window.location.replace(window.location.origin + "/api/logout");
+			} 
+			logout.onclick = gohome;
+		</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+@import url("/assets/css/patient_records/add.css");
+
+#view-record-body {
+    margin: 0 auto;
+    background-color: whitesmoke;
+}
+
+form {
+    padding-top: 0;
+    width: 1024px;
+    margin: 0 auto;
+}
+
+.right-button {
+    text-align: right;
+}
+
+td.delete-button {
+    text-align: right;
+}
+
+div.add-div {
+    width: 100%;
+    text-align: right;
+}
+
+a.add-button {
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.nav-handler {
+    margin: 0 auto;
+    width: 1024px;
+    padding-top:5px;
+}
+.table-error {
+    font-style: italic;
+    text-align: center;
+}

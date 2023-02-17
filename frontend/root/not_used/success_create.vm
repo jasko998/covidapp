@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<head>
+	<title>Edit Patient Vaccine Record</title>
+		<!--
+		Missouri COVID-19 Vaccine Tracker Application 
+		Filename: index.html
+  
+		Team: Turtle Shell Development
+		Authors: Katherine Geist
+		Date: 13 Oct 2022 
+	 
+	  -->
+	
+	<meta charset="utf-8">
+
+	<!-- ======== CSS	========================= -->
+		<link rel="stylesheet" href="assets/css/style.css">
+	<script src="assets/js/modernizr.custom.40753.js" type="text/javascript"></script>
+	<script src="assets/js/popup_help.js" type="text/javascript" defer></script>
+	<script src="assets/js/logout.js" type="text/javascript" defer></script>
+</head>
+
+
+<body>	
+	<!-- ======== HEADER	========================= -->
+	<!-- 		Written by KSG -->
+	${header}
+	
+	<img src="${qr_code}" />
+
+<!-- ============================================================================ -->
+<!-- ======== FOR ALL PAGES	========================= -->
+
+	<!-- ======== HELP POPUP BUTTON	========================= -->
+	<!-- 		Written by JM -->
+	<div>
+		<div class="modal">
+			<div class="modal-content">
+				<span class="close-button">&times;</span>
+				<h1>Please contact the Missouri IIS for assistance!</h1>
+				<p>Phone: XXX-XXX-XXXX</p>
+				<p>Email: helpme@missouri.gov</p>
+			</div>
+		</div>
+	</div>
+	
+</body>

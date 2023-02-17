@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Missouri COVID-19 Vaccine Tracker
+        </title>
+        <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Katherine Geist (KSG), Justin Macapanpan (JJM), Jasmin Milicevic (JM) Date: 19
+        Sept 2022 Supporting files: styles.css -->
+
+        <meta charset="utf-8">
+
+        <!-- ======== CSS ========================= -->
+        <link rel="stylesheet" href="assets/css/index/styles.css">
+        <link rel="scripts" href="scripts.js">
+        <link rel="stylesheet" href="assets/css/login-form.css">
+        ${global_head}
+
+        <!-- ======== JS ========================= -->
+        <script src="assets/js/popup_2fa.js" type="text/javascript" defer="defer"></script>
+        <script src="assets/js/handle_login.js" type="text/javascript" defer="defer"></script>
+
+    </head>
+
+    <body id="swup" class="transition-fade">
+        ${header}
+
+        <!-- ======== LOGIN FORM ========================= -->
+        <!-- Written by JM -->
+        <div id="login-form-wrap">
+            <form id="login-form">
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Username"
+                    oninput="validateLogin()"
+                    onblur="validateLogin()"
+                    autocomplete="off"
+                    required="required">
+                <i class="validation"></i>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    oninput="validateLogin()"
+                    onblur="validateLogin()"
+                    autocomplete="off"
+                    required="required">
+                <i class="validation"></i>
+                <p id="messages"></p>
+                <div id="login-submit">
+                    <input type="submit" id="login" value="Login" disabled="disabled">
+                    <div class="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- ======== POP UP 2FA ========================= -->
+        <!-- Written by JJM -->
+
+        <div id="pop-up"></div>
+        <div id="pop-up-content">
+            <div id="pop-up-header">
+                <svg
+                    id="exit"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="48"
+                    fill="currentColor"
+                    class="bi bi-x"
+                    viewbox="0 0 16 16">
+                    <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </div>
+            <div id="twofa-main">
+                <div id="twofa-information">
+                    <i class="bi bi-shield-lock-fill" id="twofa-icon"></i>
+                    <h3>Two Factor</h3>
+                    <p id="popup-text">Enter your code from your two factor authentication app.</p>
+                    <p id="twofa-messages"></p>
+                </div>
+                <form id="twofa">
+                    <div id="twofa-inputs">
+                        <input
+                            type="text"
+                            class="twofainput"
+                            placeholder=""
+                            value=""
+                            id="twofainput-1"
+                            maxlength="1"
+                            oninput="handle2FAInput(this)"
+                            autocomplete="off"
+                            required="required">
+                        <input
+                            type="text"
+                            class="twofainput"
+                            placeholder=""
+                            value=""
+                            id="twofainput-2"
+                            maxlength="1"
+                            oninput="handle2FAInput(this)"
+                            autocomplete="off"
+                            required="required">
+                        <input
+                            type="text"
+                            class="twofainput"
+                            placeholder=""
+                            value=""
+                            id="twofainput-3"
+                            maxlength="1"
+                            oninput="handle2FAInput(this)"
+                            autocomplete="off"
+                            required="required">
+                        <input
+                            type="text"
+                            class="twofainput"
+                            placeholder=""
+                            value=""
+                            id="twofainput-4"
+                            maxlength="1"
+                            oninput="handle2FAInput(this)"
+                            autocomplete="off"
+                            required="required">
+                        <input
+                            type="text"
+                            class="twofainput"
+                            placeholder=""
+                            value=""
+                            id="twofainput-5"
+                            maxlength="1"
+                            oninput="handle2FAInput(this)"
+                            autocomplete="off"
+                            required="required">
+                        <input
+                            type="text"
+                            class="twofainput"
+                            placeholder=""
+                            value=""
+                            id="twofainput-6"
+                            maxlength="1"
+                            oninput="handle2FAInput(this)"
+                            autocomplete="off"
+                            required="required">
+                    </div>
+                    <input type="submit" id="twofasubmit" value="Submit">
+                </form>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+        <!-- ======== FOOTER ========================= -->
+        <!-- Written by KSG -->
+        <footer class="login-footer">
+            <script>
+                "use strict";
+                var policyShown = false;
+                function togglePolicy() {
+                    if(!policyShown) {
+                        $("footer").animate({paddingTop: "0"});
+                        document.getElementById("policy-show").classList.remove("bi-caret-up-fill");
+                        document.getElementById("policy-show").classList.add("bi-caret-down-fill");
+                        policyShown = true;
+                    } else {
+                        $("footer").animate({paddingTop: "188px"});
+                        document.getElementById("policy-show").classList.remove("bi-caret-down-fill");
+                        document.getElementById("policy-show").classList.add("bi-caret-up-fill");
+                        policyShown = false;
+                    }
+
+                }
+            </script>
+            <a onclick="togglePolicy()"><h1>HIPAA Policy <i class="bi bi-caret-up-fill" id="policy-show"></i></h1></a>
+            <p>The Missouri COVID-19 Vaccine Tracker complies with
+                <a href="https://www.cdc.gov/phlp/publications/topic/hipaa.html">HIPAA</a>
+                guidelines, including restricting access only to authorized users. This site is routinely monitored
+                for unauthorized access, and violators are punishable under U.S. law.</p>
+
+            <h2>All users must follow these regulations:</h2>
+            <ul>
+                <li>
+                    <strong>1.</strong>
+                    Do not give your username or password to anyone else.
+                </li>
+                <li>
+                    <strong>2.</strong>
+                    Do not leave this workstation unattended.
+                </li>
+                <li>
+                    <strong>3.</strong>
+                    Logout immediately if you must leave this workstation.
+                </li>
+                <li>
+                    <strong>4.</strong>
+                    Only patients or their legal guardians may receive printed copies of their vaccine records.
+                </li>
+                <li>
+                    <strong>5.</strong>
+                    All vaccine record requests by other persons must go through the
+                    <a href="https://health.mo.gov/living/wellness/immunizations/showmevax/">Missouri Department of Health and Senior Services</a>.
+                </li>
+            </ul>
+        </footer>
+
+        <!-- ============= SCRIPTS ================-->
+        <!-- KSG moved to popup_help.js -->
+        <script src="https://unpkg.com/swup@latest/dist/swup.min.js"></script>
+        <script>
+            const swup = new Swup(); // only this line when included with script tag
+        </script>
+    </body>
+
+</html>

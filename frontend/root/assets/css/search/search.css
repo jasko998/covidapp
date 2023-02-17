@@ -1,0 +1,41 @@
+body {
+    margin: 0 auto;
+    background-color: whitesmoke;
+}
+#search-form {
+    border: none;
+    width: 95%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: aqua;
+}
+div.card {
+    padding-top: 10px;
+    border: 2px black;
+    background-color: whitesmoke;
+    width: 1020px;
+    margin: 0 auto;
+    text-align: center;
+}
+label.form-control {
+    text-align: left;
+}
+div.card-holder {
+    width: 100%;
+}
+
+fieldset.form-control {
+    background-color: white;
+    color: black;
+    padding: 0;
+}
+h2.pageName { 
+  	color: #3d434a;
+  	text-align: center !important;
+}
+fieldset.form-control > div {
+    padding: 13px;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 0 0 .375rem .375rem;
+}

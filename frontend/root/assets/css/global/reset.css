@@ -1,0 +1,72 @@
+/************ RESET STYLES ************/
+html {
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  font-weight: 300;
+  background-color: whitesmoke;
+}
+
+div,
+footer,
+header,
+h1,
+h2,
+h3,
+img,
+li,
+nav,
+p,
+section,
+ul {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/************ GLOBAL STYLES ************/
+/* Written by KSG, JM */
+
+body {
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 35px;
+}
+
+h2 {
+  color: #000;
+  font-size: 22px;
+}
+
+p {
+  position: relative;
+}
+
+a,
+a:link,
+a:visited,
+a:active {
+  color: #3ca9e2;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+a:hover,
+a:link:focus,
+a:link:hover,
+a:visited:focus,
+a:visited:hover,
+a:active:focus,
+a:active:hover {
+  color: #329dd5;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}

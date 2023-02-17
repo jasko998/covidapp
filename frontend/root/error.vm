@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Error ${error_code}</title>
+        ${global_head}
+        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet"/>
+        <style>
+            html {
+                height: 100%;
+            }
+            body {
+                background: radial-gradient(circle 40em at bottom, #888888, #ffffff 95%);
+            }
+            #error {
+                text-align: center;
+                font-family: 'Rubik', sans-serif;
+            }
+            #error h1 {
+                font-size: 72pt;
+            }
+        </style>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+        
+    </head>
+    <body>
+        ${header}
+        <div id="error">
+            <h1>${error_code}</h1>
+            <br />
+            <img src="/assets/images/detective_penguin.svg" alt="Penguin With Magnifying Glass and hat" />
+            <br />
+            <br />
+            <h2>${error_message}</h2>
+            <br />
+            <button type="button" class="btn btn-primary" onclick="history.back()">Go Back</button>
+        </div>
+    </body>
+</html>

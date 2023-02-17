@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+    Development Authors: Colin Kinzel Date: 15 October 2022 -->
+
+    <head>
+        <title>Add a New Vaccine Administration Site</title>
+        <link href="/assets/css/create_site/site.css" rel="stylesheet"/>
+        ${global_head}
+        <script src="https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js" defer="defer"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js"
+            integrity="sha512-ha3Is9IgbEyIInSb+4S6IlEwpimz00N5J/dVLQFKhePkZ/HywIbxLeEu5w+hRjVBpbujTogNyT311tluwemy9w=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css">
+        <script src="/assets/js/create_site/map.js" defer="defer"></script>
+        <script>
+            const counties = [];
+            #foreach($county in $counties)
+                counties.push({fips: ${county.FIPS}, name: "${county.name}"});
+            #end
+        </script>
+    </head>
+
+    <body>
+        ${header}
+        <div id="body">
+            <aside id="side-info">
+                <br />
+                <button type="button" class="btn btn-primary" id="back-button" onclick="history.back()">Go Back</button>
+                <h1 class="text-center">New Vaccine Administration Site</h1>
+                <div id="content">
+                    <form id="newSiteForm" method="POST" action="/site/add">
+                        <fieldset class="form-control">
+                            <legend>Address Information</legend>
+                            <label for="address">Street Address</label>
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="address"
+                                id="address"
+                                pattern="\d+(\s{1}\w+)(\s{1}?\w+)+"
+                                maxlength="95"
+                                required="required"
+                                
+                                oninput="this.setCustomValidity('')"
+                                oninvalid="this.setCustomValidity('Must be number (0-9) followed by the street name (a-Z) and street type (a-Z)')"
+                                >
+                            <label for="city">City</label>
+                            <input class="form-control" type="text" id="city" name="city" autocomplete="on" required="required">
+                            <label for="zip">Zip Code</label>
+                            <input
+                                class="form-control"
+                                id="zip"
+                                type="zip"
+                                name="zip"
+                                autocomplete="postal-code"
+                                maxlength="5"
+                                required="required">
+                            <label for="county">County</label>
+                            <input
+                                class="form-control"
+                                type="text"
+                                list="counties-list"
+                                id="county"
+                                placeholder="Select County"
+                                name="county"
+                                autocomplete="on"
+                                required="required">
+                            <datalist id="counties-list">
+                                #foreach($county in $counties)
+                                    <option value="${county.name}">${county.name}</option>
+                                #end
+                            </datalist>
+                            <label for="fips">FIPS Code</label>
+                            <input class="form-control" type="text" name="fips" id="fips" maxlength="5" required="required">
+                        </fieldset>
+                        <br>
+                        <fieldset class="form-control">
+                            <legend>Site Information</legend>
+                            <label for="phoneNumber">Site Phone Number</label>
+                            <input
+                                class="form-control"
+                                id="phoneNumber"
+                                type="tel"
+                                name="phone"
+                                pattern="\([0-9]{3}\) [0-9]{3} - [0-9]{4}"
+                                maxlength="16"
+                                required="required"
+                                
+                                oninput="this.setCustomValidity('')"                                        
+                                oninvalid="this.setCustomValidity('Must be in format Must be in format &#92;&#147;(&#35;&#35;&#35;) &#35;&#35;&#35; - &#35;&#35;&#35; &#92;&#147;')"
+                            >
+                            <label for="siteName">Site Name</label>
+                            <input
+                                class="form-control"
+                                id="siteName"
+                                type="text"
+                                name="siteName"
+                                maxlength="32"
+                                required="required">
+
+                        </fieldset>
+                        <br/>
+                    	<div class="text-center">
+                        <input type="submit" value="Submit" class="form-control" method="POST" id="newSite"/>
+        				<div>
+                    </form>
+                </div>
+            </aside>
+            <div id="map-container">
+                <div id="map"></div>
+            </div>
+        </div>
+        <script src="/assets/js/create_site/input_handler.js"></script>
+    </body>
+
+</html>

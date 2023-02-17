@@ -1,0 +1,23 @@
+@import url("/assets/css/patient_records/add.css");
+
+/*######### 
+DAILY AND WEEKLY STYLES
+##########*/
+label#lab{
+    margin:auto;
+    text-align: center;
+    display: block;
+}
+
+input.form-control{
+    margin: auto;
+}
+
+input#fips.form-control{
+    width:200px;
+    flex: none;
+}
+
+label.tofrom{
+    margin-top: 0.5em;
+}

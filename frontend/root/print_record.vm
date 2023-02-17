@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Print Patient Vaccine Record</title>
+        <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Katherine Geist Date: 24 Oct 2022 -->
+
+        <meta charset="utf-8">
+
+        <!-- ======== EXTERNAL SCRIPTS ========================= -->
+        <link rel="stylesheet" href="/assets/css/patient_records/add.css">
+        <script src="/assets/js/add_record.js" defer="defer"></script>
+        <link rel="stylesheet" href="/assets/css/patient_records/print.css" media="print" />
+        ${global_head}
+        <style>
+            .nav-handler {
+                margin: 0 auto;
+                width: 1024px;
+                padding-top: 5px;
+            }
+        </style>
+    </head>
+
+    <body id="add_record_body">
+        <!-- ======== HEADER ========================= -->
+        <!-- Written by KSG -->
+        ${header}
+        #set($vaccines = $patient.getVaccines())
+        #set($insurances = $patient.getInsurances())
+        <div class="nav-handler">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/record/search">Search</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/patient/view/${patient.Id}">View</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Print Record</li>
+                </ol>
+            </nav>
+        </div>
+        <!-- <h2 class="pageName">Update Existing Patient Record:</h2> -->
+
+        <!-- ======== PATIENT QUERY FORM ========================= -->
+        <!-- Written by KSG -->
+
+        <form>
+            <fieldset>
+                <legend style="font-size:20pt;">COVID-19 Vaccine Report for: ${patient.LastName}, ${patient.FirstName} ${patient.MiddleName}</legend>
+                <div>
+                    <p style="font-size:14pt;text-align: right;">Date of Birth: ${patient.BirthDate}
+                    <br>Internal Reference Number: ${patient.Id}</p>
+                </div>
+            </fieldset>
+            <fieldset>
+            <legend>Vaccinations</legend>
+            <table class="table table-striped table-hover table-bordered" style="background-color: white;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Lot Number</th>
+                                <th scope="col">Site Name</th>
+                                <th scope="col">Site Location</th>
+                                <th scope="col">Manufacturer</th>
+                                <th scope="col">Administrated On</th>
+                                <th scope="col">Administered By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            #foreach($vaccine in $vaccines)
+                                <tr>
+                                    <td>${vaccine.lotNumber()}</td>
+                                    <td>${vaccine.site().name()}</td>
+                                    <td>${vaccine.site().location()}</td>
+                                    <td>${vaccine.manufacturer()}</td>
+                                    <td>${vaccine.administeredDate()}</td>
+                                    <td>${vaccine.givenBy().lastName()}, ${vaccine.givenBy().firstName()}</td>
+                                </tr>
+                            #end
+                            #if($vaccines.isEmpty())
+                                <tr>
+                                    <td colspan="7" class="table-error">
+                                        There are no vaccines for this Patient
+                                    </td>
+                                </tr>
+                            #end
+                        </tbody>
+                    </table>
+            </fieldset>
+                    <br>
+
+                    <br>
+                    <div class="text-center">
+                        <input
+                            type="button"
+                            value="Print Record"
+                            class="submit-button btn btn-dark btn-lg"
+                            onclick="window.print();">
+                        <div>
+                            <br>
+                            <br>
+                        </form>
+                        <br>
+                        <!-- ============================================================================ -->
+                        <!-- ======== FOR ALL PAGES ========================= -->
+
+                        <!-- ======== HELP POPUP BUTTON ========================= -->
+                        <!-- Written by JM -->
+                        <div>
+                            <div class="modal">
+                                <div class="modal-content">
+                                    <span class="close-button">&times;</span>
+                                    <legend>Please contact the Missouri IIS for assistance!</legend>
+                                    <p>Phone: XXX-XXX-XXXX</p>
+                                    <p>Email: helpme@missouri.gov</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </body>

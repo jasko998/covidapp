@@ -1,0 +1,34 @@
+/*
+	Missouri COVID-19 Vaccine Tracker Application 
+	Filename: style.css
+
+	Team: Turtle Shell Development
+	Authors: Katherine Geist (KSG), Justin Macapanpan (JJM), Jasmin Milicevic (JM)
+	Date: 19 Sept 2022 
+ 
+	Supporting files: scripts.js, index.html
+	
+ */
+ .transition-fade {
+	transition: 0.4s;
+	opacity: 1;
+  }
+  
+  html.is-animating .transition-fade {
+	opacity: 0;
+  }
+  
+  #logged-in-user {
+	float: right;
+	display: block;
+	margin: 0;
+	padding-right: 3em;
+	font-weight: bold;
+	font-size: 14px;
+  }
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("../css/global/colors.css");
+@import url("../css/global/header_modal.css");
+@import url("../css/global/help_modal.css");
+@import url("../css/global/popup.css");

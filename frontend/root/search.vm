@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Patient Search</title>
+        <link href="/assets/css/search/search.css" rel="stylesheet"/>
+        ${global_head}
+        <style>
+            .nav-handler {
+                margin: 0 auto;
+                width: 1024px;
+                padding-top: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        ${header}
+        <div class="nav-handler">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Search</li>
+                </ol>
+            </nav>
+        </div>
+        <!-- Add Crumb display from bootstrap here to go back-->
+        <div class="card-holder">
+            <div class="card">
+        		<h2 class="pageName">Search for Patient </h2>       
+ 					<form action="/record/search" method="POST" class="form-control">
+                		<fieldset class="form-control">
+                  			<div>
+								<label for="lastName">Last Name<input type="text" name="lname" class="form-control" placeholder="Roosevelt"></label>
+								<label for="SSN">Last 4 of SSN<input type="text" name="ss4" class="form-control" placeholder="1234" maxlength="4"></label>
+								<label for="dateOfBirth">Date of Birth<input type="date" name="dob" class="form-control"></label>
+							</div>
+
+						<div class="text-center">
+							<input type="submit" value="Submit" class="submit-button btn btn-dark btn-lg">
+						<div>
+						
+     					</fieldset>           
+                    </form>
+                </div>
+
+            </div>
+            <br/>
+            #if($results)
+                <div class="card">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>First Name</th>
+                                <th>Middle Name</th>
+                                <th>Last Name</th>
+                                <th>Birth Date</th>
+                                <th>Last 4 SSN</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            #foreach($patient in $results)
+                                <tr>
+                                    <!-- TODO add button to go to some like page specific to the patient to see records and print
+                                    them-->
+                                    <th>
+                                        <a href="/patient/view/${patient.Id}">
+                                            <i class="bi bi-box-arrow-up-right"></i>
+                                        </a>
+                                    </th>
+                                    <th>${patient.FirstName}</th>
+                                    <th>${patient.MiddleName}</th>
+                                    <th>${patient.LastName}</th>
+                                    <th>${patient.BirthDate}</th>
+                                    <th>${patient.SSNumber}</th>
+                                    #if($patient.Email)
+                                        <th>${patient.Email}</th>
+                                    #else
+                                        <th>N/A</th>
+                                    #end
+                                </tr>
+                            #end
+                        </tbody>
+                    </table>
+                </div>
+            #end
+        </div>
+    </body>
+</html>

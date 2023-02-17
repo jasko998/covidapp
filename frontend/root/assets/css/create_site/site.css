@@ -1,0 +1,62 @@
+
+
+#content {
+    position: relative;
+    text-align: left;
+    float: left;
+    display: flex;
+}
+
+#content h1 {
+    text-align: center;
+}
+
+#newSiteForm {
+    flex-grow: 1;
+    display: inline-block;
+    position: relative;
+    margin: 20px;
+}
+
+#body {
+    display: flex;
+    height: calc(100% - 56px);
+    align-items: stretch;
+    min-width: 0;
+    background-color: whitesmoke;
+    box-shadow: 10px 5px 5px rgba(0,0,0,0.45);
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+#map-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 5;
+}
+#side-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+    padding-top: 30px;
+    width: 500px;
+}
+
+input:invalid {
+    border-color: red;
+}
+input[type=submit]:hover {
+    background-color: rgb(212, 209, 209);
+}
+
+fieldset {
+    padding-bottom: 20px;
+}
+
+#back-button {
+    margin-left: 15px;
+    margin-right: 15px;
+}

@@ -1,0 +1,29 @@
+
+@import url("../global/header_modal.css");
+@import url("multifactor.css");
+@import url("login.css");
+@import url("../global/help_modal.css");
+@import url("../index/footer.css");
+@import url("../global/reset.css");
+@import url("../global/colors.css");
+
+body {
+    background: linear-gradient(#fff 25%,#a9bccf);
+}
+.shake {
+    animation: horizontal-shaking 0.1s linear 0s 2 normal both;
+}
+#pop-up-content.remove-show {
+    animation: none;
+}
+div#pop-up-content.shake {
+    animation: horizontal-shaking 0.1s linear 0s 2 normal both;
+}
+
+@keyframes horizontal-shaking {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(5px) }
+    50% { transform: translateX(-5px) }
+    75% { transform: translateX(5px) }
+    100% { transform: translateX(0) }
+}

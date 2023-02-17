@@ -1,0 +1,38 @@
+@import url("/assets/css/patient_records/add.css");
+
+
+fieldset.form-control > div.user_entry_elements {
+   padding: 10px;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 0 0 0 0;
+   width: 100%;
+}
+
+
+fieldset.form-control > div.user_entry_elements > button.user_entry{
+    width: 100%;
+}
+
+fieldset.form-control > div.user_entry_elements > div.expand_wrapper{
+    display: none;
+}
+/* ACTUAL DATA ENTRY */
+span.input-group-text{
+    display: inline;
+    background-color: #0a58ca;
+    color: white;
+}
+
+input.inline-text{
+    display: inline;
+}
+
+button.edit_user_update{
+    background-color: #38ec28;
+    color: white;
+    border-radius: 0.4em;
+    position: relative;
+    top: 0.5em;
+    left: 80%;
+}

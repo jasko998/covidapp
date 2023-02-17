@@ -1,0 +1,42 @@
+<script src="/assets/js/logout.js" type="text/javascript" defer></script>
+<script src="/assets/js/handle_auth.js" type="text/javascript" defer></script>
+<div class="header">
+    #if($logged_in)
+        <p id="logged-in-user">Logged in as: ${user}</p>
+    #end
+    <div id="inner-header">
+        #if($logged_in)
+            <button class="logout">Logout</button>
+        #end
+        <button data-bs-toggle="modal" data-bs-target="#help-modal"><i class="bi bi-question-circle-fill"></i></button>
+        <img src="/assets/images/header/logo-banner.png"
+            alt="Missouri DHSS Logo: COVID-19 Vaccine Tracker, Authorized users only" />
+    </div>
+</div>
+<!-- ============================================================================ -->
+<!-- ======== FOR ALL PAGES	========================= -->
+
+<!-- ======== HELP POPUP BUTTON	========================= -->
+<!-- 		Written by JM -->
+<div class="modal fade" tabindex="-1" data-bs-keyboard="true" aria-hidden="true" aria-labelledby="help-modal-title"
+    id="help-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="help-modal-title"><i class="bi bi-question-circle-fill"></i> Help</h5>
+            </div>
+            <div class="modal-body">
+                <p>
+                <h4>You can contact the Missouri IIS via</h4>
+                <h5>Phone: 573-IIS-HELP<br>
+                    Email: helpme@missouri.gov</h5>
+                <br />
+                <h6>Need an account? Send an email to the above email address with your site information.</h6>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" aria-label="Close" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

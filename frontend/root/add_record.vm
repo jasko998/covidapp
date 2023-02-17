@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Add New Patient Vaccine Record</title>
+        <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Katherine Geist Date: 13 Oct 2022 -->
+
+        <meta charset="utf-8">
+
+        <!-- ======== EXTERNAL SCRIPTS ========================= -->
+        <link rel="stylesheet" href="/assets/css/patient_records/add.css">
+        <script src="/assets/js/add_record.js" defer="defer"></script>
+        <script src="/assets/js/patient_records/print_VIS.js" defer="defer"></script>
+        <script src="/assets/js/radio_button_error_flag.js" defer="defer"></script>
+        <script src="/assets/js/patient_records/format_phone.js" defer></script>
+        <script src = "phoneValidity.js" defer="defer"></script>
+        ${global_head}
+        <style>
+            .nav-handler {
+                margin: 0 auto;
+                width: 1024px;
+                padding-top: 5px;
+            }
+        </style>
+    </head>
+
+    <body id="add_record_body">
+        <!-- ======== HEADER ========================= -->
+        <!-- Written by KSG -->
+        ${header}
+
+        <div class="nav-handler">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Record</li>
+                </ol>
+            </nav>
+        </div>
+
+        <h2 class="pageName">Enter New Patient Record:</h2>
+
+        <!-- ======== PATIENT INPUT FORM ========================= -->
+        <!-- Written by KSG -->
+        <form action="/record/add" method="POST" class="background-call" data-redirect="/record/add">
+            <fieldset class="form-control">
+                <legend>DATE GIVEN</legend>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon2">Date</span>
+                    <input
+                        type="date"
+                        class="form-control"
+                        aria-describedby="basic-addon2"
+                        name="curr-date"
+                        id="date-input"
+                        readonly="readonly"
+                        required="required">
+                </div>
+            </fieldset>
+            <fieldset class="form-control">
+                <legend>PATIENT RECEIVING VACCINE</legend>
+                <div>
+                    <label for="dob">DOB</label>
+                    <input type="date" id="dob" name="dob" class="form-control" required="required">
+                    <div>
+                        <label for="lname">Last Name
+                            <input type="text" id="lname" name="lname" class="form-control name-fields" maxlength="45" required="required">
+                        </label>
+                        <label for="fname">First Name
+                            <input type="text" id="fname" name="fname" class="form-control name-fields" maxlength="45" required="required">
+                        </label>
+                        <label for="mname">Middle Name
+                            <input type="text" id="mname" name="mname" class="form-control name-fields" maxlength="45">
+                        </label>
+                    </div>
+                    <div class="field-flex">
+                        <!-- Dropdown for Sex Identuty -->
+                        <label for="sex">Sex Identity
+                            <select id="sex" name="sex" class="form-select"  required="required">
+                                <option value="">None</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Non-Binary">Non-Binary</option>
+                            </select>
+                        </label>
+                        <label for="ss4">Last 4-digits SSN
+                            <input  type="text" id="ss4" name="ss4" class="form-control"  maxlength = "4" pattern="^\d{4}$" required
+                            oninput="this.setCustomValidity('')"
+                            oninvalid="this.setCustomValidity('Must be 4 digits')" >
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset class="form-control">
+                <legend>CONTACT INFORMATION</legend>
+                <div>
+                    <label for="address">Street Address</label>
+                    <input type="text" id="address" name="address" class="form-control" pattern="^\d+(\s{1}\w+)(\s{1}?\w+)+$" maxlength="95"
+                    oninput="this.setCustomValidity('')"
+                    oninvalid="this.setCustomValidity('Must be number (0-9) followed by the street name (a-Z) and street type (a-Z)')" >
+                    <div>
+                        <label for="city">City
+                            <input type="text" id="city" name="city" class="form-control address-fields">
+                        </label>
+                        <label for="zip">Zipcode
+                            <input type="text" id="zip" name="zip" class="form-control address-fields" maxlength = "5" pattern="^\d{5}$"
+                            oninput="this.setCustomValidity('')"                                        
+                            oninvalid="this.setCustomValidity('Must be 5 digits')"
+                            >
+                        </label>
+                    </div>
+                    <div class="field-flex">
+                        <!-- Dropdown for Phone Type -->
+                        <label for="phoneType">Phone Type
+                            <select id="phoneType" name="PhoneType" class="form-select">
+                                <option value="Home">Home</option>
+                                <option value="Mobi">Mobile</option>
+                                <option value="Work">Work</option>
+                            </select>
+                        </label>
+                        <label for="phone">Phone Number
+
+                            <!-- These blocks of code entail HTML break characters arranged in a way to trigger a
+                            Javascript break sequence in the oninvalid attribute.(Ex: &#92;&#147;)
+                            because we want quotes inside the parentheses, but to prevent it from being a literal we need a backslash
+                            followed by the quotation mark. This javascript escape syntax does not apply to html and as such the javascript escape
+                            sequence is composed of html escape characters for the backslash and the character in question respectively
+                            &#92;&#147;
+                            jjm
+                             -->
+                            <input type="text" id="phone" name="phone" class="form-control phone-format" placeholder="(123) 456 - 7890" pattern="^\([0-9]{3}\) [0-9]{3} - [0-9]{4}$" maxlength ="16"
+                            oninput="this.setCustomValidity('')"
+                            oninvalid="this.setCustomValidity('Must be in format &#92;&#147;(&#35;&#35;&#35;) &#35;&#35;&#35; - &#35;&#35;&#35; &#92;&#147;')">
+                        </label>
+                        <label for="email">Email Address
+                            <input type="email" id="email" name="email" class="form-control" placeholder="eleanor@awesome.com" pattern="^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$" maxlength = "255"
+                            oninput="this.setCustomValidity('')"                                        
+                            oninvalid="this.setCustomValidity('Must be in format &#92;&lt;email handle&#92;&gt;@&#92;&lt;service&#92;&gt;.&#92;&lt;domain&#92;&gt;')">
+                        </label>
+                        <br>
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset class="form-control">
+                <legend>INSURANCE INFORMATION</legend>
+                <div>
+                    <div class="input-group">
+                        <span class="input-group-text" id="insProvider">Provider</span>
+                        <input
+                            type="text"
+                            id="insProvider"
+                            name="insProvider"
+                            class="form-control"
+                            aria-describedby="insurance"
+                            placeholder="Blue Cross Blue Shield of Missouri"
+                            maxlength="45">
+                    </div>
+                    <br>
+                    <div class="field-flex">
+                        <div class="input-group">
+                            <span class="input-group-text" id="insGroup">Group #</span>
+                            <input type="text" id="insGroup" name="insGroup" class="form-control" aria-describedby="insurance" placeholder="99-23450" maxlength="45">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="insPolicy">Policy #</span>
+                            <input
+                                type="text"
+                                id="insPolicy"
+                                name="insPolicy"
+                                class="form-control"
+                                aria-describedby="insurance"
+                                placeholder="GG3771"
+                                maxlength="45">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset class="form-control">
+                <legend>VACCINE ADMINISTERED</legend>
+                <div>
+                    <p>Current COVID-19 Vaccine Dosing Schedule (All Manufacturers)</p>
+                    <iframe
+                        id="dose_schedule"
+                        title="COVID-19 Dose Schedule as of Oct 2022"
+                        height="300"
+                        width="720"
+                        src="https://www.cdc.gov/vaccines/covid-19/downloads/COVID-19-immunization-schedule-ages-6months-older.pdf"
+                        tabindex="-1"></iframe>
+                    <br><br>
+
+                    <!-- Vaccine Manufacturer Radio Button -->
+					<div class ="container-fluid">
+						<div class="row justify-content-center">
+							<p>Vaccine Manufacturer</p>
+						</div>
+					</div>
+                    <div class="input-group" role="group">
+						<div class="field-flex">
+                            <input
+                                type="radio"
+                                id="pfizer"
+                                name="vaxMan"
+                                value="pfizer"
+                                class="vaxMan btn-check"
+                                aria-describedby="basic-addon1"
+                                required>
+                            <label for="pfizer" class="vaxMan-label btn btn-primary">Pfizer-BioNTech</label><br>
+                            <input
+                                type="radio"
+                                id="moderna"
+                                name="vaxMan"
+                                value="moderna"
+                                class="vaxMan btn-check"
+                                aria-describedby="basic-addon1">
+                            <label for="moderna" class="vaxMan-label btn btn-primary">Moderna</label><br>
+                            <input
+                                type="radio"
+                                id="janssen"
+                                name="vaxMan"
+                                value="janssen"
+                                class="vaxMan btn-check"
+                                aria-describedby="basic-addon1">
+                            <label for="janssen" class="vaxMan-label btn btn-primary">Johnson & Johnson’s Janssen</label><br>
+                            <input
+                                type="radio"
+                                id="novavax"
+                                name="vaxMan"
+                                value="novavax"
+                                class="vaxMan btn-check"
+                                aria-describedby="basic-addon1">
+                            <label for="novavax" class="vaxMan-label btn btn-primary">Novavax</label>
+                        </div>
+                    </div>
+
+                    
+                    
+                    <!-- Vaccine Lot Number -->
+                    <br>
+                        <div class="row">
+							<div class="col">
+								<div class="input-group">
+									<span class="input-group-text" id="lot-num-addon">Lot Number</span>
+									<input type="text" id="lotNumber" name="lotNumber" class="form-control" aria-describedby="lot-num-addon" placeholder="900-HJK45" required="required">
+								</div>
+							</div>
+							<div class="col"></div>
+							</div>
+                    <br>
+                    <!-- Dropdown for Vax Dose -->
+                    <div class="input-group" role="group">
+                        <span class="input-group-text">Vaccine Series Dose</span>
+                        <select id="dose" name="dose" class="form-select"  required="required">
+                            <option value="" disabled="disabled" selected="selected">Select Dose</option>
+
+                            <option value="adDose1" >Adult (18+) Primary Series, Monovalent Dose 1</option>
+                            <option value="adDose2">Adult (18+) Primary Series, Monovalent Dose 2</option>
+                            <option value="adBooster1">Adult (18+) Booster, Monovalent Dose 3
+                            </option>
+                            <option value="adBooster2">Adult (18+) Booster, Monovalent Dose 4</option>
+                            <option value="adBoosterBiv">Adult (18+) Booster, Bivalent Dose 5</option>
+
+                            <option value="teenDose1">Teen (12-17) Primary Series, Monovalent Dose 1</option>
+                            <option value="teenDose2">Teen (12-17) Primary Series, Monovalent Dose 2</option>
+                            <option value="teenBooster1">Teen (12-17) Booster, Monovalent Dose 3</option>
+                            <option value="teenBoosterBiv">Teen (12-17) Booster, Bivalent Dose 4</option>
+
+                            <option value="chDose1">Child (5-11) Primary Series, Monovalent Dose 1</option>
+                            <option value="chDose2">Child (5-11) Primary Series, Monovalent Dose 2</option>
+                            <option value="chBooster1">Child (5-11) Booster, Monovalent Dose 3</option>
+                            <option value="chBoosterBiv">Child (5-11) Booster, Bivalent Dose 4</option>
+
+                            <option value="infDose1">Young Child (6mos-4) Primary Series, Monovalent Dose 1</option>
+                            <option value="infDose2">Young Child (6mos-4) Primary Series, Monovalent Dose 2</option>
+                            <option value="infBooster1">Young Child (6mos-4) Booster, Monovalent Dose 3</option>
+                        </select>
+                    </div>
+                    <br>
+
+                    <div class="btn-group" role="group">
+                        <input
+                            type="radio"
+                            id="english"
+                            name="lang"
+                            value="english"
+                            class="lang btn-check"
+                            checked="checked">
+                        <label for="english" class="lang-button btn btn-outline-secondary">English</label><br>
+                        <input type="radio" id="spanish" name="lang" value="spanish" class="lang btn-check">
+                        <label for="spanish" class="lang-button btn btn-outline-secondary">Espa&ntilde;ol</label>
+                    </div>
+                    <button type="button" class="print-button btn btn-primary">Print Vaccine Information Sheet</button>
+                    <!-- Print Vaccine Information Sheet (VIS) -->
+
+                    <!-- for debugging -->
+                    <!-- <br> <br> <p> The value of dose: <span class="vax"></span> </p> <p> The value of manufacturer
+                    is: <span class="manu"></span> </p> <p> The language is: <span class="language"></span> </p> -->
+                </div>
+            </fieldset>
+            <br>
+            <div class="text-center">
+                <input type="submit" value="Submit" class="submit-button btn btn-dark btn-lg" id="checked">
+        	<div>
+			<br>
+			<br>
+		</form>
+		<br>
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="main-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="" class="rounded me-2" alt="...">
+                <strong class="me-auto" id="response-name"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="response"></div>
+        </div>
+    </div>
+        <script src="/assets/js/patient_records/handle_requests.js" defer></script>
+</body>

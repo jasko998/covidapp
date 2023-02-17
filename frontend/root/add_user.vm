@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Add Application User</title>
+        <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Colin Kinzel 24 Oct 2022 -->
+
+        <meta charset="utf-8">
+
+        <!-- ======== CSS ========================= -->
+        <link rel="stylesheet" href="/assets/css/users/add.css">
+        <script type="text/javascript" src="/../assets/js/users/add_user.js" defer></script>
+        ${global_head}
+        <style>
+            .nav-handler {
+                margin: 0 auto;
+                width: 1024px;
+                padding-top: 5px;
+            }
+        </style>
+    </head>
+
+    <body id="add_record_body">
+        <!-- ======== HEADER ========================= -->
+        <!-- Written by KSG -->
+        ${header}
+
+        <div class="nav-handler">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Add User</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!-- ======== Add User INPUT FORM ========================= -->
+        <!-- Written by KSG -->
+        <div id="userCreateForm">
+            <form onsubmit="createUser();" id="createUserForm">
+                <fieldset class="form-control">
+                    <legend>ADD USER</legend>
+                    <div id="inputs-bg">
+                    <div class="input-group">
+                        <span class="input-group-text">Username</span>
+                        <input type="text" id="username" name="username" class="form-control name-fields" maxlength="45" minlength="4" required>
+                        <span class="input-group-text">Password</span>
+                        <input type="password" id="password" name="password" class="form-control name-fields" required>
+                        <input type="button" id="auto-generate" name="" class="form-control" value="Generate Password">
+                        <script type="text/javascript" defer="defer">
+                            document
+                                .getElementById("auto-generate")
+                                .onclick = () => {
+                                    var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                                    var passwordLength = 12;
+                                    var password = "";
+                                    for (var i = 0; i <= passwordLength; i++) {
+                                        var randomNumber = Math.floor(Math.random() * chars.length);
+                                        password += chars.substring(randomNumber, randomNumber + 1);
+                                    }
+                                    document
+                                        .getElementById("password")
+                                        .value = password;
+                                }
+                        </script>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-text">First Name</span>
+                        <input type="text" id="fname" name="fname" class="form-control name-fields" required>
+                        <span class="input-group-text">Last Name</span>
+                        <input type="text" id="lname" name="lname" class="form-control name-fields" required>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-text">Email</span>
+                        <input type="email" id="email" name="email" class="form-control name-fields" required>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-text">Site</span>
+                        <select id="sites" name="site" class="form-select name-fields" required>
+                            <option hidden selected value>Select a Site...</option>
+                            #foreach( $site in $sites)
+                                <option value="${site.Id}">${site.Name}</option>
+                            #end
+                        </select>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-text">Permissions Level</span>
+                        <select id="user-type" name="user_type" class="form-select name-fields" required>
+                            <option hidden selected value>Select Permissions Level...</option>
+                            #foreach($type in $types)
+                                <option value="${type.Id}">${type.Name}</option>
+                            #end
+                        </select>
+                    </div>
+                    </div>
+                </fieldset>
+                <br/>
+                <div class="text-center">
+                    <input type="submit" value="Submit" class="submit-button btn btn-dark btn-lg">
+                    <div>
+                        <br>
+                        <br>
+                        <div
+                            class="modal fade"
+                            id="successModal"
+                            tabindex="-1"
+                            aria-labelledby="success-modal-label"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="success-modal-label">Success!</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="success-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" id="success-mail">Email</a>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </body>
+    </html>

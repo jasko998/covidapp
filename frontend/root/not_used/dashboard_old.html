@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+
+    <!-- ======== CSS	========================= -->
+	<link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dashboard/dashboard.css"/>
+    <link href="assets/css/dashboard/temp.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<!--     <script src="assets/js/dashboardStyle.js" type="text/javascript" defer></script> -->
+
+  </head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Dashboard</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <form class="d-flex" role="search">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="logout" href="/api/logout">Logout</a>
+                    </li>
+                  </ul>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+
+      <!-- ======== DASHBOARD FOR PROVIDERS	========================= -->
+      <!-- 		Written by JJM -->
+      <div id="dashboard-providers">
+          <div class="dash-header">
+            Vaccination Providers
+        </div>
+
+        <div class="dashboard">
+            <a>Add Entry</a>
+            <a>Edit Entry</a>
+            <a>View/Print Entry</a>
+        </div>
+
+        <div class="dash-header">
+            Vaccination Provider Adminsitrative Users Only
+        </div>
+
+        <div class="dashboard">
+            <a>Add User</a>
+            <a>Edit User Access</a>
+        </div>
+    </div>
+
+
+    <!-- ======== DASHBOARD FOR IIS	========================= -->
+    <!-- 		Written by JJM -->
+    <div id="dashboard-iis">
+          <div class="dash-header">
+            MO IIS REPORTS
+        </div>
+
+        <div class="dashboard">
+            <a>View/Print Entry</a>
+            <a>Query Vaccination Records</a>
+            <a>Export Preset Queries</a>
+        </div>
+
+        <div class="dash-header">
+            IIS Administrative Users Only
+        </div>
+
+        <div class="dashboard">
+            <a>Add User</a>
+            <a>Create Vaccine Provider Admin account</a>
+            <a>Edit User Access</a>
+            <a>Register Vaccine Provider Locations</a>
+        </div>
+    </div>
+
+    <!-- ======== DASHBOARD FOR IIS	========================= -->
+    <!-- 		Written by JJM -->
+    <div id="dashboard-cdc">
+        <div class="dash-header">
+          CDC Reports
+      </div>
+
+      <div class="dashboard">
+          <a>Export Preset Queries</a>
+          <a>Create Manual reports</a>
+      </div>
+  </div>
+</body>
+
+</html>

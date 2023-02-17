@@ -1,0 +1,50 @@
+/**************** FOOTER ****************/
+/* Written by KSG */
+
+footer {
+    position: relative;
+    display: inline-block;
+    bottom: 0;
+    background-color: #fff;
+    width: 100%;
+    margin-top: auto;
+    height: 15rem;
+  }
+  
+  footer h1 {
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    background-color: #003366;
+  }
+  
+  footer h2 {
+    text-align: left;
+    font-size: 14px;
+    color: #ff751a;
+    margin: 15px 0px 10px 5px;
+  }
+  
+  footer p {
+    text-align: center;
+    color: #003366;
+    font-size: 14px;
+    margin: 5px 20px 0px 20px;
+  }
+  
+  footer ul {
+    text-align: left;
+    color: #003366;
+    font-size: 12px;
+  }
+  
+  footer ul li {
+    display: block;
+    list-style: none;
+    margin: 2.5px;
+  }
+  
+  .spacer {
+    display: flex;
+    flex: 1 0 auto;
+  }

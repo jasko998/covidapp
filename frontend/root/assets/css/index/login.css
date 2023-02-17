@@ -1,0 +1,89 @@
+/**************** LOGIN FORM****************/
+/* Written by Jasmin Milicevic, small changes by KSG */
+
+#login-form-wrap {
+    background-color: whitesmoke;
+    width: 30%;
+    min-width: 400px;
+    margin: 60px auto;
+    text-align: center;
+    padding: 20px 20px 20px 20px;
+    border-radius: 4px;
+    box-shadow: 0 30px 50px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  #login-form {
+    padding: 0 10px;
+  }
+  
+  #login-submit {
+    width: 100%;
+  }
+  #login-submit input {
+    display: inline-block;
+    min-width: 50%;
+    max-width: 100%;
+  }
+  
+  input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    outline: none;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 4px;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 0 0 0 10px;
+    margin: 10px auto 10px auto;
+    color: black;
+    border: 1px solid #c2c0ca;
+    font-style: normal;
+    font-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    display: inline-block;
+    background: none;
+  }
+  
+  input[type="text"]:invalid:focus,
+  input[type="password"]:invalid:focus {
+    border-color: red;
+  }
+  
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-color: #3ca9e2;
+  }
+  
+  input[type="submit"] {
+    border: none;
+    margin: 10px auto 10px auto;
+    background-color: #d3dde8;
+    color: #083569;
+    font-weight: bold;
+    text-transform: uppercase;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    font-size: 18px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+  }
+  input[type="submit"]:disabled {
+    background-color: rgba(77, 77, 77, 0.5);
+    color: rgba(122, 122, 122, 1);
+  }
+  
+footer.login-footer {
+  background-clip: content-box;
+  padding-top: 188px;
+  overflow: hidden;
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Dashboard</title>
+        <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Katherine Geist (KSG), Justin Macapanpan (JJM) Date: 4 October 2022 -->
+
+        <meta charset="utf-8">
+
+        <!-- ======== CSS ========================= -->
+        <link rel="stylesheet" href="assets/css/dashboard/styles.css">
+
+        <!-- ======== JS ========================= -->
+        ${global_head}
+
+        <!-- ======== SCRIPTS ========================= -->
+        <!-- Added by KSG to only display the selected block-->
+        <!-- Adapted from:
+        https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-file -->
+        <!-- <script> function show(shown, hidden) { document.getElementById(shown).style.display='block';
+        document.getElementById(hidden).style.display='none'; return false; } </script> -->
+    </head>
+
+    <body>
+
+        <!-- ======== HEADER ========================= -->
+        <!-- Written by KSG -->
+        ${header}
+        <!-- COLLATED AND ORGANIZED BY KSG -->
+        <!-- ============================================================================ -->
+        <!-- ======== DASHBOARD PAGE - VACCINATION PROVIDERS ========================= -->
+        <h1 id="welcome">Welcome, ${username}</h1>
+        <div id="options">
+            <div id="glass-display">
+            #if ( $edit_patient || $write_patient || $read_patient)
+                <div id="VaxProviders">
+                    <!-- <div id="VaxProviders" style="display:none"> -->
+
+                    <!-- ======== DASHBOARD FOR PROVIDERS ========================= -->
+                    <!-- Written by JJM -->
+                    <div class="dash-header">
+                        Records
+                    </div>
+                    <div class="dash-wrapper">
+                        <div class="dashbuttons">
+                            #if ($write_patient)
+                                <a href="/record/add">Add Vaccine Record</a>
+                            #end
+                            #if ($edit_patient)
+                                <a href="/record/search">Edit Record</a>
+                            #end
+                            #if ($read_patient)
+                                <a href="/record/search">View / Print Record</a>
+                            #end
+                        </div>
+                    </div>
+                </div>
+            #end
+            <!-- ======== END VACCINATION PROVIDERS ========================= -->
+            #if ( $reports )
+                <!-- ============================================================================ -->
+                <!-- ======== DASHBOARD PAGE - MISSOURI IIS USERS ========================= -->
+                <!-- <div id="IIS"> -->
+                <div id="IIS">
+                    <!-- ======== DASHBOARD FOR IIS USERS ========================= -->
+                    <!-- Written by JJM -->
+                    <div class="dash-header">
+                        Generate a Report
+                    </div>
+                    <div class="dash-wrapper">
+                        <div class="dashbuttons">
+                            <a href="/report/daily">Daily Report</a>
+                            <a href="/report/weekly">Weekly Report</a>
+                        </div>
+                    </div>
+                </div>
+            #end
+            <!-- ======== END IIS USERS ========================= -->
+            #if($create_user || $edit_user || $add_site)
+                <!-- ======== END CDC USERS ========================= -->
+                <!-- ============================================================================ -->
+                <!-- ======== DASHBOARD PAGE - MISSOURI ADMIN ========================= -->
+                <!-- <div id="IISadmin"> -->
+                <div id="IISadmin">
+                    <!-- ======== DASHBOARD FOR IIS ADMIN ========================= -->
+                    <!-- Written by JJM -->
+                    <div class="dash-header">
+                        Manage Accounts / Locations
+                    </div>
+                    <div class="dash-wrapper">
+                        <div class="dashbuttons">
+                            #if ($add_user)
+                                <a href="/user/add">Add New User Account</a>
+                            #end
+                            #if ($edit_user)
+                                <a href="/user/edit">Edit / Delete User Access</a>
+                            #end
+                            #if ($add_site)
+                                <a href="/site/add">Register Vaccine Provider Location</a>
+                            #end
+                        </div>
+                    </div>
+                </div>
+                <!-- ======== END IIS ADMIN ========================= -->
+            #end
+
+            #if($show_onboard)
+                <div>
+                    <div
+                        class="modal fade"
+                        tabindex="-1"
+                        data-bs-backdrop="static"
+                        data-bs-keyboard="false"
+                        aria-hidden="true"
+                        aria-labelledby="modal-title"
+                        id="onboard-start">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modal-title">Covid-19 Dashboard Onboarding</h5>
+                                </div>
+                                <div class="modal-body" id="onboard-body" style="text-align: center;">
+                                    <p>Welcome to the Covid-19 Dashboard, to continue to the dashboard you must first setup your Two
+                                        Factor Authenication for Security Purposes. Click Continue to begin</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" aria-label="Continue" id="onboard-continue">Continue</button>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="assets/js/onboard.js" type="text/javascript"></script>
+                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                    <div id="error-toast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <img src="..." class="rounded me-2" alt="...">
+                            <strong class="me-auto" id="error-title">Error</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body" id="error-message">
+                            ...
+                        </div>
+                    </div>
+                </div>
+            #end
+            </div>
+        </div>
+    </body>
+</html>

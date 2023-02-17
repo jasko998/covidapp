@@ -1,0 +1,48 @@
+/************ HEADER ************/
+/* Written by KSG */
+.header {
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    left: 0%;
+    right: 1%;
+    top: 0%;
+    flex-shrink: 0;
+  }
+  #inner-header {
+    padding: 2em;
+  }
+  
+  /* Banner Image*/
+  /* Image dimensions have been set to prevent the page from never being too narrow */
+  .header img {
+    max-height: 150px;
+    min-height: 80px;
+    max-width: 100%;
+  }
+  
+  /* Header buttons */
+  .header button {
+    float: right;
+    color: #666666;
+    text-align: left;
+    text-decoration: none;
+    font-size: 14pt;
+    border: none;
+    padding: 5px;
+    background-color: #fff;
+    margin: 5px 10px 5px 5px;
+  }
+  
+  /* Change the background color of buttons on mouse-over */
+  .header button:hover {
+    color: #083569;
+    transition: all 0.5s;
+  }
+  button.logout {
+    color: red;
+  }
+  

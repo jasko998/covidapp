@@ -1,0 +1,1 @@
+cp "frontend/root" "backend/web-service/src/main/resources/frontend"

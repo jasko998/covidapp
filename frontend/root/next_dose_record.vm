@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Add Next Dose Vaccine Record</title>
+    <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Katherine Geist Date: 13 Oct 2022 -->
+
+    <meta charset="utf-8">
+
+    <!-- ======== EXTERNAL SCRIPTS ========================= -->
+    <link rel="stylesheet" href="/assets/css/patient_records/add.css">
+    <script src="/assets/js/add_record.js" defer></script>
+    <script src="/assets/js/patient_records/print_VIS.js" defer></script>
+    <script src="/assets/js/radio_button_error_flag.js" defer="defer"></script>
+    <style>
+        .nav-handler {
+            margin: 0 auto;
+            width: 1024px;
+            padding-top: 5px;
+        }
+    </style>
+    ${global_head}
+</head>
+
+
+<body id="add_record_body">
+    <!-- ======== HEADER ========================= -->
+    <!-- Written by KSG -->
+    ${header}
+
+    <div class="nav-handler">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/dashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="/record/search">Search</a>
+                </li>
+                <li class="breadcrumb-item active" ><a href="/patient/view/${patient.Id}">View</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add Vaccine</li>
+            </ol>
+        </nav>
+    </div>
+
+	<h2 class="pageName">Enter Patient's Next Dose:</h2>
+		
+    <!-- ======== PATIENT INPUT FORM ========================= -->
+    <!-- Written by KSG -->
+    <form action="/vaccine/add/${patient.Id}" method="POST">
+        <fieldset class="form-control">
+            <legend>VACCINE ADMINISTERED</legend>
+            <div>
+                <p>Current COVID-19 Vaccine Dosing Schedule (All Manufacturers)</p>
+                <iframe id="dose_schedule" title="COVID-19 Dose Schedule as of Oct 2022" height="300" width="720"
+                    src="https://www.cdc.gov/vaccines/covid-19/downloads/COVID-19-immunization-schedule-ages-6months-older.pdf"
+                    tabindex="-1">
+                </iframe>
+                <br><br>
+                
+                <!-- Vaccine Manufacturer Radio Button -->
+                    <!-- Vaccine Manufacturer Radio Button -->
+					<div class ="container-fluid">
+						<div class="row justify-content-center">
+							<p>Vaccine Manufacturer</p>
+						</div>
+					</div>
+                    <div class="input-group" role="group">
+						<div class="field-flex">
+						<input type="radio" id="pfizer" name="vaxMan" value="pfizer" class="vaxMan btn-check" aria-describedby="basic-addon1">
+						<label for="pfizer" class="vaxMan-label btn btn-primary">Pfizer-BioNTech</label><br>
+						<input type="radio" id="moderna" name="vaxMan" value="moderna" class="vaxMan btn-check" aria-describedby="basic-addon1">
+						<label for="moderna" class="vaxMan-label btn btn-primary">Moderna</label><br>
+						<input type="radio" id="janssen" name="vaxMan" value="janssen" class="vaxMan btn-check" aria-describedby="basic-addon1">
+						<label for="janssen" class="vaxMan-label btn btn-primary">Johnson & Johnson’s Janssen</label><br>
+						<input type="radio" id="novavax" name="vaxMan" value="novavax" class="vaxMan btn-check" aria-describedby="basic-addon1">
+						<label for="novavax" class="vaxMan-label btn btn-primary">Novavax</label>
+					</div>
+                </div>
+                <!-- Vaccine Lot Number -->
+                <br>
+                <div class="row">
+                <div class="col">
+					<div class="input-group">
+						<span class="input-group-text" 
+						id="lot-num-addon">Lot Number</span>
+						<input type="text" id="lotNumber" 
+						name="lotNumber" class="form-control"
+						aria-describedby="lot-num-addon" 
+						required="required">
+					</div>
+					</div>
+						<div class="col">
+					</div>
+                </div>
+                <br>
+                <!-- Dropdown for Vax Dose -->
+                <div class="input-group" role="group">
+                        <span class="input-group-text">Vaccine Series Dose</span>
+                        <select id="dose" name="dose" class="form-select"  required="required">
+                            <option value="" disabled="disabled" selected="selected">Select Dose</option>
+
+                            <option value="adDose1" >Adult (18+) Primary Series, Monovalent Dose 1</option>
+                            <option value="adDose2">Adult (18+) Primary Series, Monovalent Dose 2</option>
+                            <option value="adBooster1">Adult (18+) Booster, Monovalent Dose 3
+                            </option>
+                            <option value="adBooster2">Adult (18+) Booster, Monovalent Dose 4</option>
+                            <option value="adBoosterBiv">Adult (18+) Booster, Bivalent Dose 5</option>
+
+                            <option value="teenDose1">Teen (12-17) Primary Series, Monovalent Dose 1</option>
+                            <option value="teenDose2">Teen (12-17) Primary Series, Monovalent Dose 2</option>
+                            <option value="teenBooster1">Teen (12-17) Booster, Monovalent Dose 3</option>
+                            <option value="teenBoosterBiv">Teen (12-17) Booster, Bivalent Dose 4</option>
+
+                            <option value="chDose1">Child (5-11) Primary Series, Monovalent Dose 1</option>
+                            <option value="chDose2">Child (5-11) Primary Series, Monovalent Dose 2</option>
+                            <option value="chBooster1">Child (5-11) Booster, Monovalent Dose 3</option>
+                            <option value="chBoosterBiv">Child (5-11) Booster, Bivalent Dose 4</option>
+
+                            <option value="infDose1">Young Child (6mos-4) Primary Series, Monovalent Dose 1</option>
+                            <option value="infDose2">Young Child (6mos-4) Primary Series, Monovalent Dose 2</option>
+                            <option value="infBooster1">Young Child (6mos-4) Booster, Monovalent Dose 3</option>
+                        </select>
+            </div>
+                <br>
+
+                <div class="btn-group" role="group">
+                   		<input type="radio" id="english" name="lang" value="english" class="lang btn-check" checked>
+                    	<label for="english" class="lang-button btn btn-outline-secondary" >English</label><br>
+                    	<input type="radio" id="spanish" name="lang" value="spanish" class="lang btn-check">
+                    	<label for="spanish" class="lang-button btn btn-outline-secondary">Espa&ntilde;ol</label>
+                </div>
+                	    <button type="button" class="print-button btn btn-primary">Print Vaccine Information Sheet</button>
+                <!--  Print Vaccine Information Sheet (VIS)	 -->
+
+                <!-- for debugging -->
+                <!-- 
+						<br>
+						<br>
+						<p> The value of dose: <span class="vax"></span> </p>
+						<p> The value of manufacturer is: <span class="manu"></span> </p>
+						<p> The language is: <span class="language"></span> </p>
+ -->
+            </div>
+        </fieldset>
+        <br>
+        <div class="text-center">
+            <input type="submit" value="Submit" class="submit-button btn btn-dark btn-lg" id="checked">
+		<div>
+        <br>
+    </form>
+    <br>
+    <!-- ============================================================================ -->
+    <!-- ======== FOR ALL PAGES ========================= -->
+
+    <!-- ======== HELP POPUP BUTTON ========================= -->
+    <!-- Written by JM -->
+ <!-- 
+   <div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <p>Please contact the Missouri IIS for assistance!</p>
+                <p>Phone: XXX-XXX-XXXX</p>
+                <p>Email: helpme@missouri.gov</p><br>
+            </div>
+        </div>
+    </div>
+ -->
+
+
+</body>

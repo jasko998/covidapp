@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+
+  dashboard-db:
+    image: turtleshelldevelopment:database
+    ports:
+      - "3306:3306"
+    volumes:
+      - dashboard_db:/var/lib/mysql
+    networks:
+      - backend-dashboard
+    environment:
+      - MYSQL_ROOT_PASSWORD=SuperSecurePassword
+  dashboard-backend:
+    image: turtleshelldevelopment:backend
+    ports:
+      - "8090:8091"
+    networks:
+      - backend-dashboard
+    volumes:
+      - backend_store:/store
+
+volumes:
+  dashboard_db:
+  backend_store:
+
+networks:
+  backend-dashboard: {}
+  frontend-dashboard: {}

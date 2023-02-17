@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+#twofasubmit {
+    background-color: white;
+    font-family: "Arial", Impact, Charcoal, sans-serif;
+    font-weight: bold;
+    font-size: 12pt;
+    color: #003366;
+    width: 90%;
+  }
+  #twofasubmit:hover {
+    background-color: #3287b4;
+  }
+  
+  #twofa-messages {
+    min-height: 34px;
+    color: red;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  #pop-up-content {
+    display: none;
+    position: absolute;
+    color: black;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -260px;
+    height: 520px;
+    width: 400px;
+    z-index: 2;
+    border: #003366;
+    border-width: 100px;
+    background-color: whitesmoke;
+    border-radius: 10px 0 10px 0;
+    animation: fade_in_show 0.5s;
+  }
+  
+  @keyframes fade_in_show {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+  
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  #twofa-main {
+    padding: 30px;
+    text-align: center;
+  }
+  
+  #twofa-information {
+    text-align: center;
+  }
+  
+  #twofa-icon {
+    font-size: 70pt;
+    text-align: center;
+    width: 100%;
+  }
+  
+  #popup-text {
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    margin: auto 10px;
+  }
+  #twofa-inputs .twofainput {
+    width: 12%;
+    font-weight: bold;
+    font-size: 25pt;
+  }
+  #twofa-inputs .twofainput:nth-child(3) {
+    margin-right: 40px;
+  }
+  div.mfa-backdrop {
+    --bs-backdrop-zindex: 0;
+    opacity: 0.65;
+  }

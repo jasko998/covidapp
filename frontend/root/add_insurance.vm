@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Add Insurance</title>
+    <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Katherine Geist Date: 13 Oct 2022 -->
+
+    <meta charset="utf-8">
+
+    <!-- ======== EXTERNAL SCRIPTS ========================= -->
+    <link rel="stylesheet" href="/assets/css/patient_records/add.css">
+    ${global_head}
+    <style>
+        .nav-handler {
+            margin: 0 auto;
+            width: 1024px;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+
+
+<body id="add_record_body">
+    <!-- ======== HEADER ========================= -->
+    <!-- Written by KSG -->
+    ${header}
+
+    <div class="nav-handler">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/dashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="/record/search">Search</a>
+                </li>
+                <li class="breadcrumb-item active" ><a href="/patient/view/${patient.Id}">View</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add Insurance</li>
+            </ol>
+        </nav>
+    </div>
+
+	<h2 class="pageName">Add Insurance:</h2>
+		
+    <!-- ======== PATIENT INPUT FORM ========================= -->
+    <!-- Written by KSG -->
+    <form action="/insurance/add/${patient.Id}" method="POST" class="background-call" data-redirect="/patient/view/${patient.Id}">
+        <fieldset class="form-control">
+                <legend>INSURANCE INFORMATION</legend>
+                <div>
+                    <div class="input-group">
+                        <span class="input-group-text" id="insProvider">Provider</span>
+                        <input
+                            type="text"
+                            id="insProvider"
+                            name="insProvider"
+                            class="form-control"
+                            aria-describedby="insurance"
+                            placeholder="Blue Cross Blue Shield of Missouri"
+                            maxlength="45">
+                    </div>
+                    <br>
+                    <div class="field-flex">
+                        <div class="input-group">
+                            <span class="input-group-text" id="insGroup">Group #</span>
+                            <input type="text" id="insGroup" name="insGroup" class="form-control" placeholder="99-23450" aria-describedby="insurance" maxlength="45">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text" id="insPolicy">Policy #</span>
+                            <input
+                                type="text"
+                                id="insPolicy"
+                                name="insPolicy"
+                                class="form-control"
+                                aria-describedby="insurance"
+                                 placeholder="GG3771"
+                                maxlength="45">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        <br>
+        <div class="text-center">
+			<input type="submit" value="Submit" class="submit-button btn btn-dark btn-lg">
+		<div>
+        <br>
+    </form>
+    <br>
+    <!-- ============================================================================ -->
+    <!-- ======== FOR ALL PAGES ========================= -->
+
+    <!-- ======== HELP POPUP BUTTON ========================= -->
+    <!-- Written by JM -->
+    <div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <p>Please contact the Missouri IIS for assistance!</p>
+                <p>Phone: XXX-XXX-XXXX</p>
+                <p>Email: helpme@missouri.gov</p><br>
+            </div>
+        </div>
+    </div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="main-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img class="rounded me-2" alt="...">
+                <strong class="me-auto" id="response-name"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="response"></div>
+        </div>
+    </div>
+    <script src="/assets/js/patient_records/handle_requests.js"></script>
+</body>

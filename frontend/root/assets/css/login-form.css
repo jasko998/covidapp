@@ -1,0 +1,67 @@
+/*
+	Missouri COVID-19 Vaccine Tracker Application 
+	Filename: index.html
+
+	Team: Turtle Shell Development
+	Authors: Katherine Geist (KSG), Justin Macapanpan (JJM), Jasmin Milicevic (JM), Colin Kinzel(CK)
+	Date: 19 Sept 2022 
+ 
+	Supporting files: scripts.js, styles.css
+	
+ */
+
+/********* Login Form Edits *********/
+/* Written by Colin Kinzel          */
+/************************************/
+
+#messages {
+  color: red;
+  font-size: 12pt;
+  padding: 10px;
+  text-align: left;
+  min-height: 18px;
+  min-width: 536px;
+}
+
+#login-submit {
+  position: relative;
+  display: flex;
+}
+
+.lds-ring {
+  display: none;
+  flex-wrap: nowrap;
+  margin: 15px 10px;
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  margin: 8px;
+  border: 8px solid #000;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #000 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

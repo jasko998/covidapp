@@ -1,0 +1,79 @@
+/************ HELP MODAL ************/
+/* Written by JM, changed by Katherine Geist */
+
+/* KSG commented out */
+/* 
+button {
+  float: right;
+  width: 10%;
+  border-radius: 2px;
+  border: medium solid #003366;
+  background-color: white;
+  font-family: "Arial", Impact, Charcoal, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  color: #003366;
+  padding: 2px 5px;
+}
+ */
+
+ #help-modal-parent::before {
+    box-sizing: content-box;
+  }
+  
+  .help-modal {
+    display: block;
+    position: fixed;
+    right: 40%;
+    left: 40%;
+    top: 30%;
+    width: 20%;
+    height: 20%;
+    background-color: white;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    box-sizing: content-box;
+    overflow: visible;
+  }
+  
+  .help-modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 5% 20% 10%;
+    width: 24rem;
+    border-radius: 0.5rem;
+    color: #003366;
+    text-align: center;
+    border: medium solid #003366;
+  }
+  
+  /* KSG commented out */
+  /* 
+  .close-button {
+    position: relative;
+    left: 60%;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: default;
+    border-radius: 0.25rem;
+    font-size: 200%;
+  }
+   */
+  
+  .close-button:hover {
+    color: darkgray;
+  }
+  
+  .show-help-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+  }

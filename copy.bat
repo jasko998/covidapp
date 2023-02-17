@@ -1,0 +1,1 @@
+xcopy "frontend/root" "backend/web-service/src/main/resources/frontend" /E/H/Y

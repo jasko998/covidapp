@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Create Daily Report</title>
+    <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Katherine Geist Date: 6 Nov 2022 -->
+
+    <meta charset="utf-8">
+
+    <!-- ======== EXTERNAL SCRIPTS ========================= -->
+    <link rel="stylesheet" href="/assets/css/patient_records/dayweek.css">
+    ${global_head}
+
+    <!-- DATE PICKER SCRIPTS-->
+
+    <!-- Datepicker Itself -->
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css'
+        rel='stylesheet' type='text/css'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js'
+        type='text/javascript'></script>
+    <script src="/assets/js/records_dump/daily-record-date-picker.js"></script>
+
+    <style>
+        .nav-handler {
+            margin: 0 auto;
+            width: 1024px;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+
+<body id="add_record_body">
+    <!-- ======== HEADER ========================= -->
+    <!-- Written by KSG -->
+    ${header}
+
+    <div class="nav-handler">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/dashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Daily Report</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- ======== PATIENT QUERY FORM ========================= -->
+    <!-- Written by KSG -->
+
+    <form method="POST" action="/report/daily/generate">
+        <fieldset class="form-control">
+            <legend>DAILY REPORT</legend>
+            <div>
+                <label id="lab" for="daily-report-date">Choose date for report (up to one week prior):</label>
+                <input type="text" class="form-control" id="daily-report-date" name="daily-report-date">
+                <br>
+            </div>
+        </fieldset>
+        <br>
+
+        <br>
+        <div class="text-center">
+            <input type="submit" value="Download CSV" class="submit-button btn btn-dark btn-lg">
+            <!-- onclick="window.print();"> -->
+            <div>
+                <br>
+                <br>
+            </div>
+        </div>
+    </form>
+    <br>
+</body>
+
+</html>

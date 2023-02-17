@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Edit User Account</title>
+        <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Katherine Geist Date: 13 Oct 2022 -->
+
+        <meta charset="utf-8">
+
+        <!-- ======== EXTERNAL SCRIPTS ========================= -->
+        <link rel="stylesheet" href="/assets/css/users/edit.css">
+        <script src="/assets/js/add_record.js" defer="defer"></script>
+        <script src="/assets/js/patient_records/print_VIS.js" defer="defer"></script>
+        <script src="/assets/js/modernizr.custom.40753.js"></script>
+        <script src="phoneValidity.js" defer="defer"></script>
+        ${global_head}
+        <style>
+            .nav-handler {
+                margin: 0 auto;
+                width: 1024px;
+                padding-top: 5px;
+            }
+
+            div.card {
+                padding-top: 10px;
+                border: 2px black;
+                background-color: whitesmoke;
+                width: 1020px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            div.card-holder {
+                width: 100%;
+            }
+        </style>
+
+        <!-- ======== COLLAPSE SCRIPT========================= -->
+        <script defer="defer">
+            // for (var usersArray = [], i=usersArray1.length; i;){  usersArray[--i] = usersArray1[i];
+            // console.log(usersArray[i]); console.log("D"); usersArray2=usersArray; }
+            window.addEventListener('load', function () {
+                /*if(new URL(window.location).searchParams.get('permissionSuccess') != null) {
+                    console.log("found permission success");
+                    document
+                        .getElementById("response-name")
+                        .innerText = "Set Permission";
+                    document
+                        .getElementById("response")
+                        .innerText = "Set Permission of User Successfully";
+                    location.reload();
+                    var url = new URL(window.location);
+                    url.searchParams.delete("siteSuccess");
+                    window.history.pushState(url);
+                    $('.toast').toast('show');
+                } else if(new URL(window.location).searchParams.get('siteSuccess') != null) {
+                    console.log("found site success");
+                    document
+                        .getElementById("response-name")
+                        .innerText = "Update Site";
+                    document
+                        .getElementById("response")
+                        .innerText = "Set Site of User " + elem.getAttribute("data-user") + " Successfully";
+                    var url = new URL(window.location);
+                    url.searchParams.delete("siteSuccess");
+                    window.history.pushState(url);
+                    $('.toast').toast('show');
+                }*/
+            });
+        </script>
+        <script>
+            function updateSite() {
+                var url = [location.protocol, '//', location.host, location.pathname].join('');
+                window.location = url + "?site=" + document
+                    .getElementById("site")
+                    .value;
+            }
+
+            function changePermission(elem) {
+                $.post(window.location.origin + "/user/permission/set/" + elem.getAttribute("data-user"), {
+                    "permission": elem.value
+                }, function () {
+                    var url = new URL(window.location);
+                    url.searchParams.set("permissionSuccess", 1);
+                    window.location = url;
+                });
+            }
+            function changeSite(elem) {
+                $.post(window.location.origin + "/user/site/set/" + elem.getAttribute("data-user"), {
+                    "siteId": elem.value
+                }, function () {
+                    var url = new URL(window.location);
+                    url.searchParams.set("siteSuccess", 1);
+                    window.location = url;
+                });
+            }
+        </script>
+    </head>
+    <body id="add_record_body">
+        <!-- ======== HEADER ========================= -->
+        <!-- Written by KSG -->
+        ${header}
+
+        <div class="nav-handler">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Users</li>
+                </ol>
+            </nav>
+        </div>
+        <!-- ======== SITE SEARCH ========================= -->
+        <form action="" method="POST">
+            <fieldset class="form-control">
+                <legend>Site Search</legend>
+                <div class="input-group">
+                    <select
+                        id="site"
+                        name="site"
+                        class="form-select"
+                        required="required"
+                        onchange="updateSite()"
+                        autocomplete='off'>
+                        #foreach($site in $sites)
+                            <option value="${site.Id}" #if($site.id == $current_site) selected="selected" #end>${site.Name}</option>
+                        #end
+                    </select>
+                </div>
+            </fieldset>
+        </form>
+
+        <!-- ======== RESULTS (templates, not actual data) ========================= -->
+        <div class="card-holder">
+            <div class="card">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Permission</th>
+                            <th>Change Site</th>
+                            <th>Disable</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        #foreach($user in $users)
+                            <tr>
+                                <td>${user.getLastName()}, ${user.getFirstName()}</td>
+                                <td>
+                                    <select
+                                        class="form-select permission-edit"
+                                        aria-label="Select"
+                                        data-user="${user.getUserId()}"
+                                        autocomplete='off'
+                                        onchange="changePermission(this)">
+                                        #foreach($permission in $permissions)
+                                            <option
+                                                value="${permission.Id}"
+                                                #if($permission.name == $user.getUserType())
+                                                selected="selected"
+                                                #end>${permission.Name}</option>
+                                        #end
+                                    </select>
+                                </td>
+                                <td>
+                                    <select
+                                        class="form-select site-edit"
+                                        aria-label="Select"
+                                        data-user="${user.getUserId()}"
+                                        autocomplete='off'
+                                        onchange="changeSite(this)">
+                                        #foreach($site in $sites)
+                                            <option value="${site.Id}" #if($site.id == $current_site) selected="selected" #end>${site.Name}</option>
+                                        #end
+                                    </select>
+                                </td>
+                                <td>
+                                    #if($user.isDisabled())
+                                        <a href="/user/enable/${user.getUserId()}">Enable</a>
+                                    #else
+                                        <a href="/user/disable/${user.getUserId()}">Disable</a>
+                                    #end
+                                </td>
+                            </tr>
+                        #end
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto" id="response-name"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="response"></div>
+        </div>
+        </div>
+    </body>

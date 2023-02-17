@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Create Weekly Report </title>
+        <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Katherine Geist Date: 6 Nov 2022 -->
+
+        <meta charset="utf-8">
+
+        <!-- ======== EXTERNAL SCRIPTS ========================= -->
+        <link rel="stylesheet" href="/assets/css/patient_records/dayweek.css">
+        <script src="/assets/js/add_record.js" defer="defer"></script>
+		${global_head}
+
+		<!-- Datepicker Itself -->
+		<link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css' rel='stylesheet' type='text/css'>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js' type='text/javascript'></script>
+        <script src="/assets/js/records_dump/weekly-record-date-picker.js"></script>
+
+        <style>
+            .nav-handler {
+                margin: 0 auto;
+                width: 1024px;
+                padding-top: 5px;
+            }
+        </style>
+    </head>
+
+    <body id="add_record_body">
+        <!-- ======== HEADER ========================= -->
+        <!-- Written by KSG -->
+        ${header}
+
+        <div class="nav-handler">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Weekly Report</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!-- ======== PATIENT QUERY FORM ========================= -->
+        <!-- Written by KSG -->
+
+        <form method="POST" action="/report/weekly/generate">
+            <fieldset class="form-control">
+                <legend>WEEKLY REPORT</legend>
+                	<div>
+                   		<label id="lab" for="date">Choose week of report:</label>
+ 							<input 
+ 								type="text" 
+ 								class="form-control" 
+ 								id="datepicker" 
+ 								name="weekly-report-date"> <br>
+						</label>
+					</div>
+			</fieldset>
+			<br>
+            <fieldset class="form-control">
+				<legend>QUERY FIELDS - Choose at least one:</legend>      
+				    <div>                             
+						<!-- Dropdown for Vax Dose -->
+						<div class="input-group" role="group">
+							<span class="input-group-text">Vaccine Series Dose</span>
+							<select id="dose" name="dose" class="form-select">
+								<option disabled selected value> -- </option>
+								<option value="All">All Doses</option>
+
+								<option value="adDose1">Adult (18+) Primary Series, Monovalent Dose 1</option>
+								<option value="adDose2">Adult (18+) Primary Series, Monovalent Dose 2</option>
+								<option value="adBooster1">Adult (18+) Booster, Monovalent Dose 3
+								</option>
+								<option value="adBooster2">Adult (18+) Booster, Monovalent Dose 4</option>
+								<option value="adBoosterBiv">Adult (18+) Booster, Bivalent Dose 5</option>
+
+								<option value="teenDose1">Teen (12-17) Primary Series, Monovalent Dose 1</option>
+								<option value="teenDose2">Teen (12-17) Primary Series, Monovalent Dose 2</option>
+								<option value="teenBooster1">Teen (12-17) Booster, Monovalent Dose 3</option>
+								<option value="teenBoosterBiv">Teen (12-17) Booster, Bivalent Dose 4</option>
+
+								<option value="chDose1">Child (5-11) Primary Series, Monovalent Dose 1</option>
+								<option value="chDose2">Child (5-11) Primary Series, Monovalent Dose 2</option>
+								<option value="chBooster1">Child (5-11) Booster, Monovalent Dose 3</option>
+								<option value="chBoosterBiv">Child (5-11) Booster, Bivalent Dose 4</option>
+
+								<option value="infDose1">Young Child (6mos-4) Primary Series, Monovalent Dose 1</option>
+								<option value="infDose2">Young Child (6mos-4) Primary Series, Monovalent Dose 2</option>
+								<option value="infBooster1">Young Child (6mos-4) Booster, Monovalent Dose 3</option>
+							</select>
+						</div>
+						<br>
+                        <!-- Dropdown for Sex Identuty -->
+                        <div class="input-group" role="group">
+							<span class="input-group-text">Sex Identity</span>
+                            <select id="sex" name="sex" class="form-select">
+                                <option disabled selected value> -- </option>
+                                <option value="All">All</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Non-Binary">Non-Binary</option>
+                            </select>
+                    	</div>
+                        <br> 
+                        <div>
+                    		<span class="input-group-text">Choose an age range in years (1-99):</span>
+                    		<br>
+                    	</div>
+                    	<div class="field-flex">
+                    		<label class="tofrom" for="start_age">From:</label>
+								<input type="text" id="start_age" name="start_age" class="form-control address-fields" pattern="^\d{1,2}">
+                    		<label class="tofrom" for="end_age">To:</label>
+								<input type="text" id="end_age" name="end_age" class="form-control address-fields" pattern="^\d{1,2}">
+						</div>    			
+                        <br>
+                        <div class="input-group" role="group">
+                        	<span class="input-group-text">FIPS</span>
+                            	<input type="text" id="fips" name="fips" class="form-control address-fields">
+                    	</div>
+                    </div>					
+                </fieldset>
+                <br>
+
+				<br>
+				<div class="text-center">
+					<input
+						type="submit"
+						value="Download CSV"
+						class="submit-button btn btn-dark btn-lg">
+<!-- 						onclick="window.print();"> -->
+					<div>
+					<br>
+					<br>
+				</form>
+				<br>
+
+            </body>

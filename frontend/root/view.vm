@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>View Patient</title>
+        <!-- Missouri COVID-19 Vaccine Tracker Application Filename: index.html Team: Turtle Shell
+        Development Authors: Katherine Geist Date: 13 Oct 2022 -->
+
+        <meta charset="utf-8">
+
+        <!-- ======== EXTERNAL SCRIPTS ========================= -->
+        <link rel="stylesheet" href="/assets/css/patient_records/view.css">
+        <script src="/assets/js/add_record.js" defer="defer"></script>
+        <script src="/assets/js/patient_records/print_VIS.js" defer="defer"></script>
+        ${global_head}
+        #set($insurances = $patient.getInsurances())
+        #set($contacts = $patient.getContacts())
+        #set($vaccines = $patient.getVaccines())
+    </head>
+
+    <body id="view-record-body">
+        <!-- ======== HEADER ========================= -->
+        <!-- Written by KSG -->
+        ${header}
+        <!-- ======== PATIENT INPUT FORM ========================= -->
+        <!-- Written by KSG -->
+        <div class="nav-handler">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/record/search">Search</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">View</li>
+                </ol>
+            </nav>
+        </div>
+
+        <form action="/record/edit/${patient.Id}" method="POST" id="update-patient" class="background-call">
+            <!--- TODO: update patient using JQuery to handle request and response to a notification on the bottom right with toasts from bootstrap -->
+            <fieldset class="form-control">
+                <legend>PATIENT INFORMATION</legend>
+                <div>
+                    <label for="dob">DOB</label>
+                    <input type="date" id="dob" name="dob" class="form-control" value="${patient.BirthDate}" disabled>
+                    <div>
+                        <label for="lname">Last Name
+                            <input
+                                type="text"
+                                id="lname"
+                                name="lname"
+                                class="form-control name-fields"
+                                value="${patient.LastName}" 
+                                maxlength = "45"
+                                #if(!$edit_patient)
+                                    disabled
+                                #end
+                                >
+                        </label>
+                        <label for="fname">First Name
+                            <input
+                                type="text"
+                                id="fname"
+                                name="fname"
+                                class="form-control name-fields"
+                                value="${patient.FirstName}"
+                                maxlength = "45"
+                                #if(!$edit_patient)
+                                    disabled
+                                #end
+                                >
+                        </label>
+                        <label for="mname">Middle Name
+                            <input
+                                type="text"
+                                id="mname"
+                                name="mname"
+                                class="form-control name-fields"
+                                value="${patient.MiddleName}"
+                                maxlength = "45"
+                                #if(!$edit_patient)
+                                    disabled
+                                #end
+                                >
+                        </label>
+                    </div>
+                    <div class="field-flex">
+                        <!-- Dropdown for Sex Identuty -->
+                        <label for="sex">Sex Identity
+                            <select id="sex" name="sex" class="form-select"
+                                #if(!$edit_patient)
+                                    disabled
+                                #end
+                            >
+                                <option value="Female" #if($patient.Gender == "Female") selected #end>Female</option>
+                                <option value="Male"  #if($patient.Gender == "Male") selected #end>Male</option>
+                                <option value="Non-Binary"  #if($patient.Gender != "Female" && $patient.Gender != "Male") selected #end>Non-Binary</option>
+                            </select>
+                        </label>
+                        <label for="ss4">Last 4-digits SSN
+                            <input
+                                type="text"
+                                id="ss4"
+                                name="ss4"
+                                class="form-control"
+                                maxlength="4"
+                                value="${patient.SSNumber}" disabled>
+                        </label>
+                        <label for="email">Email
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="form-control"
+                                maxlength="255"
+                                #if($patient.Email)
+                                    value="${patient.Email}"
+                                #end
+                                #if(!$edit_patient)
+                                    disabled
+                                #end>
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <br/>
+            #if($edit_patient)
+                <div class="right-button">
+                    <input type="submit" value="Update" class="submit-button btn btn-dark"/>
+                    <a href="/record/search" class="btn btn-dark">Cancel</a>
+                </div>
+            #end
+            <br>
+            <fieldset class="form-control">
+                <legend>CONTACT INFORMATION</legend>
+                <div>
+                    <table class="table table-striped table-hover table-bordered" style="background-color: white;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Address</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Phone Type</th>
+                                #if($edit_patient)
+                                    <th scope="col">Delete</th>
+                                #end
+                            </tr>
+                        </thead>
+                        <tbody>
+                            #foreach($contact in $contacts)
+                                <tr>
+                                    #if($contact.address())
+                                        <td>${contact.address()}</td>
+                                    #else
+                                        <td>N/A</td>
+                                    #end
+                                    #if($contact.phoneNumber())
+                                        <td>(${contact.phoneNumber().substring(0, 3)})  ${contact.phoneNumber().substring(3, 6)} - ${contact.phoneNumber().substring(6, 10)}</td>
+                                    #else
+                                        <td>N/A</td>
+                                    #end
+                                    #if($contact.phoneType())
+                                        #if($contact.phoneType() == "Mobi")
+                                            <td>Mobile</td>
+                                        #else
+                                            <td>${contact.phoneType()}</td>
+                                        #end
+                                    #else
+                                        <td>N/A</td>
+                                    #end
+                                    #if($edit_patient)
+                                        <td class="delete-button">
+                                            <a href="/contact/remove/${patient.Id}/${contact.id()}" class="btn btn-danger">Delete</a>
+                                        </td>
+                                    #end
+                                </tr>
+                            #end
+                            #if($contacts.isEmpty())
+                                <tr>
+                                    <td colspan="4" class="table-error">
+                                        There are no contacts for this Patient
+                                    </td>
+                                </tr>
+                            #end
+                        </tbody>
+                    </table>
+                    #if($edit_patient || $write_patient)
+                        <div class="add-div">
+                            <a href="/contact/add/${patient.Id}" class="add-button btn btn-danger">Add Contact</a>
+                        </div>
+                    #end
+                </div>
+            </fieldset>
+            <br>
+            <fieldset class="form-control">
+                <legend>INSURANCE INFORMATION</legend>
+                <div>
+                    <table class="table table-striped table-hover table-bordered" style="background-color: white;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Provider</th>
+                                <th scope="col">Group Number</th>
+                                <th scope="col">Policy Number</th>
+                                #if($edit_patient)
+                                    <th scope="col">Delete</th>
+                                #end
+                            </tr>
+                        </thead>
+                        <tbody>
+                            #foreach($insurance in $insurances)
+                                <tr>
+                                    <td>${insurance.provider()}</td>
+                                    <td>${insurance.groupNumber()}</td>
+                                    <td>${insurance.policyNumber()}</td>
+                                    #if($edit_patient)
+                                        <td class="delete-button">
+                                            <a href="/insurance/remove/${patient.Id}/${insurance.id()}" class="btn btn-danger">Delete</a>
+                                        </td>
+                                    #end
+                                </tr>
+                            #end
+                            #if($insurances.isEmpty())
+                                <tr>
+                                    <td colspan="4" class="table-error">
+                                        There are no insurance providers for this Patient
+                                    </td>
+                                </tr>
+                            #end
+                        </tbody>
+                    </table>
+                    #if($edit_patient || $write_patient)
+                        <div class="add-div">
+                            <a href="/insurance/add/${patient.Id}" class="add-button btn btn-danger">Add Insurance</a>
+                        </div>
+                    #end
+                </div>
+            </fieldset>
+            <br />
+            <fieldset class="form-control">
+                <legend>VACCINE INFORMATION</legend>
+                <div>
+                    <table class="table table-striped table-hover table-bordered" style="background-color: white;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Lot Number</th>
+                                <th scope="col">Site Name</th>
+                                <th scope="col">Site Location</th>
+                                <th scope="col">Manufacturer</th>
+                                <th scope="col">Administered On</th>
+                                <th scope="col">Administered By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            #foreach($vaccine in $vaccines)
+                                <tr>
+                                    <td>${vaccine.lotNumber()}</td>
+                                    <td>${vaccine.site().name()}</td>
+                                    <td>${vaccine.site().location()}</td>
+                                    <td>${vaccine.manufacturer()}</td>
+                                    <td>${vaccine.administeredDate()}</td>
+                                    <td>${vaccine.givenBy().lastName()}, ${vaccine.givenBy().firstName()}</td>
+                                </tr>
+                            #end
+                            #if($vaccines.isEmpty())
+                                <tr>
+                                    <td colspan="7" class="table-error">
+                                        There are no vaccines for this Patient
+                                    </td>
+                                </tr>
+                            #end
+                        </tbody>
+                    </table>
+                    #if($edit_patient || $write_patient)
+                        <div class="add-div">
+                            <a href="/vaccine/add/${patient.Id}" class="add-button btn btn-danger">Add Vaccine</a>
+                            <a href="/patient/print/${patient.Id}" class="add-button btn btn-primary">Print Last Record</a>
+                        </div>
+                    #end
+                </div>
+            </fieldset>
+            <br>
+            <br>
+            <br>
+        </form>
+        <br>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="main-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img class="rounded me-2" alt="...">
+                <strong class="me-auto" id="response-name"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="response"></div>
+        </div>
+        </div>
+        <script src="/assets/js/patient_records/handle_requests.js"></script>
+    </body>
+</html>
